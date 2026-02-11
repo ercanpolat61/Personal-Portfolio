@@ -17,6 +17,7 @@
   --second-bg-color: #ACBFA4;
   --text-color: #262626;
   --main-color: #FF7F11;
+  --progress-width: 0%;
 }
 
 html {
@@ -689,7 +690,7 @@ section {
 
 /* Activate progress bars when in viewport */
 .skills-container.active .skill-progress {
-  width: var(--progress-width);
+  width: var(--progress-width, 0%);
 }
 /* SKILLS END */
 

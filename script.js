@@ -46,10 +46,10 @@ const skillProgressBars = document.querySelectorAll('.skill-progress');
 function isInViewport(element) {
   const rect = element.getBoundingClientRect();
   return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    rect.bottom > 0 &&
+    rect.right > 0 &&
+    rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.left < (window.innerWidth || document.documentElement.clientWidth)
   );
 }
 
@@ -59,10 +59,12 @@ function animateSkills() {
     if (!skillsContainer.classList.contains('active')) {
       skillsContainer.classList.add('active');
       
-      // Animate each progress bar
-      skillProgressBars.forEach((bar) => {
+      // Animate each progress bar with staggered timing
+      skillProgressBars.forEach((bar, index) => {
         const progress = bar.getAttribute('data-progress');
-        bar.style.setProperty('--progress-width', progress + '%');
+        setTimeout(() => {
+          bar.style.setProperty('--progress-width', progress + '%');
+        }, index * 150); // 150ms delay between each bar
       });
     }
   }
@@ -72,7 +74,9 @@ function animateSkills() {
 window.addEventListener('scroll', animateSkills);
 
 // Check on page load
-window.addEventListener('load', animateSkills);
+window.addEventListener('load', () => {
+  setTimeout(animateSkills, 100);
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
