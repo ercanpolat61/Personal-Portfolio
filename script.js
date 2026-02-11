@@ -129,7 +129,7 @@ const certificatesData = [
     title: 'İngilizce Sertifikasi',
     issuer: 'Amasya University',
     date: 'December 2022'
-  }
+  },
   {
     image: 'certificates/bilgiteknogiris_page-0001.jpg',
     title: 'Bilgi Teknolojileri Giriş Sertifikasi',
