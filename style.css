@@ -297,6 +297,68 @@ section {
     width: calc(100% + 8px);
   }
 }
+
+.home {
+  position: relative;
+}
+
+.home-email-fixed {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+
+  color: var(--text-color);
+
+  opacity: 0;
+  animation: homeEmailAppear 1.2s ease forwards;
+  animation-delay: 1s;
+}
+
+.home-email-fixed i {
+  font-size: 3rem;
+  color: var(--main-color);
+}
+
+.home-email-fixed a {
+  color: var(--text-color);
+  text-decoration: none;
+  position: relative;
+}
+
+.home-email-fixed a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: var(--main-color);
+  transition: width 0.4s ease;
+}
+
+.home-email-fixed a:hover::after {
+  width: 100%;
+}
+
+@keyframes homeEmailAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 /* HOME END */
 
 /* EDUCATION START */
@@ -427,7 +489,7 @@ section {
 }
 
 .service-box {
-  background-color: var(--main-color);
+  background-color: var(--second-bg-color);
   height: 300px;
   border-radius: 3rem;
   border: 5px solid transparent;
@@ -467,9 +529,173 @@ section {
 }
 /* SERVICES END */
 
+/* SKILLS START */
+.skills {
+  background-color: var(--second-bg-color);
+  padding: 100px 15px;
+}
+
+.skills h2 {
+  color: #262626;
+  margin-bottom: 5rem;
+}
+
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.skill-category {
+  background: linear-gradient(145deg, rgba(226, 232, 206, 0.9), rgba(172, 191, 164, 0.6));
+  border-radius: 2rem;
+  padding: 3rem 2.5rem;
+  border: 3px solid rgba(255, 127, 17, 0.2);
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.skill-category:hover {
+  transform: translateY(-10px);
+  border-color: var(--main-color);
+  box-shadow: 0 10px 30px rgba(255, 127, 17, 0.3);
+}
+
+.category-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid rgba(255, 127, 17, 0.3);
+}
+
+.category-header i {
+  font-size: 3.5rem;
+  color: var(--main-color);
+  padding: 1rem;
+  background: rgba(255, 127, 17, 0.1);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover .category-header i {
+  transform: rotate(360deg);
+  background: rgba(255, 127, 17, 0.2);
+}
+
+.category-header h3 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #262626;
+}
+
+.skill-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.skill-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: slideIn 0.6s ease forwards;
+}
+
+.skill-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.skill-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.skill-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.skill-name {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #262626;
+}
+
+.skill-percentage {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--main-color);
+}
+
+.skill-bar {
+  width: 100%;
+  height: 1.2rem;
+  background: rgba(38, 38, 38, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #FF7F11, #FFA500);
+  border-radius: 1rem;
+  width: 0;
+  transition: width 1.5s ease;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255, 127, 17, 0.5);
+}
+
+.skill-progress::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Activate progress bars when in viewport */
+.skills-container.active .skill-progress {
+  width: var(--progress-width);
+}
+/* SKILLS END */
+
 /* TESTIMONIALS START */
 .testimonials {
-  background-color: var(--second-bg-color);
+  background-color: var(--bg-color);
 }
 
 .testimonials-box {
@@ -489,8 +715,8 @@ section {
 .testimonial-item {
   min-height: 550px;
   max-width: 450px;
-  background-color: rgb(226, 232, 206);
-  border: 3px solid rgba(238, 238, 238, 0.2);
+  background-color:rgb(226, 232, 206);
+  border: 3px solid rgb(172, 191, 164);
   border-radius: 2rem;
   margin: 0 3rem;
   padding: 30px 60px;
@@ -537,7 +763,7 @@ section {
 
 /* CONTACT START */
 .contact {
-  background-color: var(--bg-color);
+  background-color: var(--second-bg-color);
 }
 
 .contact form {
@@ -659,6 +885,10 @@ input[type="number"] {
     grid-template-columns: repeat(2, 1fr);
     margin: 0 5rem;
   }
+
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 991px) {
@@ -690,6 +920,10 @@ input[type="number"] {
 
   .services {
     padding-bottom: 7rem;
+  }
+
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .testimonials .wrapper {
@@ -764,6 +998,10 @@ input[type="number"] {
 
   .services-container {
     grid-template-columns: repeat(1, 1fr);
+  }
+
+  .skills-container {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -852,6 +1090,23 @@ input[type="number"] {
     line-height: 1;
   }
 
+  .skills-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .skill-category {
+    padding: 2rem 1.5rem;
+  }
+
+  .category-header h3 {
+    font-size: 2rem;
+  }
+
+  .category-header i {
+    font-size: 2.8rem;
+  }
+
   .testimonial-item:nth-child(2) {
     border: none;
     box-shadow: none;
@@ -917,6 +1172,10 @@ input[type="number"] {
     font-size: 1.8rem;
     line-height: 1;
   }
+
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media screen and (min-width: 1025px) {
@@ -934,10 +1193,3 @@ input[type="number"] {
   }
 }
 /* MEDIA QUERIES END */
-
-/*574,
- 575 - 767,
-  768 - 991,
-   992 - 1023,
-    1024 - 1199,
-     1200 */
